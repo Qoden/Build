@@ -1,0 +1,15 @@
+<Project>
+
+	<Target Name="Pack">
+		<Warning Text="Running custom iOS/Android version of 'pack' target. It works like normal 'pack' target but not fully compatible."/>
+		<PropertyGroup>
+			<NugetOutput Condition="'$(NugetOutput)' == ''">$(OutputPath)</NugetOutput>
+		</PropertyGroup>
+
+		<Exec Command="nuget pack -Version $(PackageVersion) -Symbols -Build -Output $(NugetOutput) -Properties Configuration=$(Configuration);description='$(Description)';id=$(PackageId); "/>  
+	</Target> 
+
+	<Target Name="Restore">
+		<Exec Command="nuget restore"/>  
+	</Target> 
+</Project>
